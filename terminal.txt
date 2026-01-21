@@ -1,20 +1,17 @@
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
 
-step1_verify_data.py
+python data_verification.py
+python clean_and_split.py
+python qa_pairs.py
+python chunk_knowledge.py
+python build_vector_db.py
 
-step2_clean_and_split.py
+python rag_eval.py
+python retrieval_test.py
+python safe_answer.py
 
-step3_build_qa_pairs.py
+python llm_rag.py
 
-step4_chunk_knowledge.py
-
-step5_build_vector_db.py
-
-step6_retrieval_test.py
-
-step7_safe_answering.py
-
-step8_rag_generation.py
-
-step10_rag_evaluation.py
-
-step11_llm_rag.py
+streamlit run app.py
