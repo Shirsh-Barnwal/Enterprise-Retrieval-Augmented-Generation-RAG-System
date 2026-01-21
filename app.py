@@ -61,8 +61,10 @@ def build_vector_db():
 @st.cache_resource
 def load_resources():
     embed_model = SentenceTransformer("all-MiniLM-L6-v2")
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
+    client = OpenAI(
+    api_key=os.getenv("DEEPSEEK_API_KEY"),
+    base_url="https://api.deepseek.com"
+)
     if not os.path.exists(FAISS_INDEX_PATH):
         index, metadata, embed_model = build_vector_db()
     else:
@@ -104,7 +106,7 @@ if st.button("Ask"):
             context, distance = result
 
             response = client.chat.completions.create(
-                model="gpt-4o-mini",
+                model="deepseek-chat",
                 messages=[
                     {"role": "system", "content": "Answer strictly from context."},
                     {"role": "user", "content": f"Context:\n{context}\n\nQuestion:\n{query}"}
